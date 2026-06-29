@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="glass-card about-hero">
+    <h1>About AgriPredict</h1>
+    <p class="hero-text">AgriPredict combines modern crop science, soil analysis, and weather awareness to help farmers choose the best crop for their land.</p>
+</section>
+
+<section class="glass-card about-details">
+    <h2 class="section-title">What makes AgriPredict different?</h2>
+    <div class="about-grid">
+        <div class="info-card">
+            <h3>Localized accuracy</h3>
+            <p>We look at the seven most important farm inputs and match them to crops that thrive in your conditions.</p>
+        </div>
+        <div class="info-card">
+            <h3>Actionable insights</h3>
+            <p>Each recommendation is accompanied by a confidence score so you can make decisions with clarity.</p>
+        </div>
+        <div class="info-card">
+            <h3>Future-ready farming</h3>
+            <p>AgriPredict is built to grow with your needs, adding more data sources and seasonal advice over time.</p>
+        </div>
+    </div>
+</section>
+
+<section class="glass-card contact-subscribe">
+    <div class="contact-panel">
+        <div class="contact-item">
+            <h3>Contact Us</h3>
+            <p>Have a question about crop recommendations or want to share feedback? Reach out anytime.</p>
+            <p>Email: <a href="mailto:nareshkumarrockey@gmail.com">support@agripredict.com</a></p>
+            <p>Phone: +91 9597758445</p>
+        </div>
+        <div class="contact-item">
+            <h3>Subscribe for Future Updates</h3>
+            <p>Receive future crop model updates and farming tips.</p>
+            {% if message %}
+            <div class="subscribe-message">
+                {{ message }}
+            </div>
+            {% endif %}
+
+           {% if email %}
+           <form class="subscribe-form" action="/subscribe" method="POST">
+            <input type="email" name="email" placeholder="Enter your email" required>
+            <button type="submit">Subscribe</button>
+           </form>
+            {% else %}
+            <p style="color:red;">Please login to subscribe for future updates.</p>
+            <a href="{{ url_for('login') }}">Login</a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}

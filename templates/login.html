@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="login-card">
+        <h2 class="section-title">Login to AgriPredict</h2>
+        {% if message %}
+        <div class="login-alert">{{ message }}</div>
+        {% endif %}
+        <form class="login-form" action="/login" method="POST">
+            <label for="username">Username</label>
+            <input id="username" type="text" name="username" placeholder="Enter username" required>
+
+            <label for="password">Password</label>
+            <div class="password-wrapper">
+                <input id="password" type="password" name="password" placeholder="Enter password" required>
+                <button type="button" id="togglePassword" class="password-toggle" aria-label="Show password">👁️</button>
+            </div>
+
+            <button type="submit">Sign In</button>
+
+            <div class="login-links">
+                <span>New to AgriPredict?</span>
+                <a href="{{ url_for('register') }}">Create an account</a>
+            </div>
+        </form>
+    </section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const passwordInput = document.getElementById('password');
+    const toggleButton = document.getElementById('togglePassword');
+    if (!passwordInput || !toggleButton) {
+        return;
+    }
+
+    toggleButton.addEventListener('click', function (event) {
+        event.preventDefault();
+        const isHidden = passwordInput.type === 'password';
+        passwordInput.type = isHidden ? 'text' : 'password';
+        toggleButton.textContent = isHidden ? '🙈' : '👁️';
+        toggleButton.setAttribute('aria-label', isHidden ? 'Hide password' : 'Show password');
+    });
+});
+</script>
+{% endblock %}

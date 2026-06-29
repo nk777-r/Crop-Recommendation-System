@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AgriPredict helps farmers choose the best crop using soil and weather data.">
+    <title>AgriPredict - Smart Crop Recommendation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+<!-- Navbar -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        🌾 Agri Predict
+    </div>
+
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#predict">Predict</a></li>
+        <li><a href="/logout">Logout</a></li>
+    </ul>
+
+</nav>
+
+<div class="page-wrapper">
+
+    <!-- Hero Section -->
+
+    <section class="hero glass-card">
+
+        <h1>
+            🌾 Smart Crop Recommendation System
+        </h1>
+
+        <p class="hero-text">
+            Predict the best crop for your soil and weather conditions using Machine Learning.
+        </p>
+
+    </section>
+
+    <!-- Prediction Form -->
+
+    <section id="predict" class="glass-card predict-section">
+
+        <h2 class="section-title">
+            Enter Soil & Weather Details
+        </h2>
+
+        <div class="sub-container">
+            <form action="/predict" method="POST">
+                <div class="input-grid">
+                    <div class="form-column">
+                        <input type="number" step="0.01"
+                               name="N"
+                               placeholder="🌱 Nitrogen (N)"
+                               min="0" required>
+
+                        <input type="number" step="0.01"
+                               name="P"
+                               placeholder="🧪 Phosphorus (P)"
+                               min="0" required>
+
+                        <input type="number" step="0.01"
+                               name="K"
+                               placeholder="🍃 Potassium (K)"
+                               min="0" required>
+
+                        <input type="number" step="0.01"
+                               name="ph"
+                               placeholder="⚗ pH Value"
+                               min="0" required>
+                    </div>
+
+                    <div class="form-column">
+                        <input type="number" step="0.01"
+                               name="temperature"
+                               placeholder="🌡 Temperature (°C)"
+                               min="0" required>
+
+                        <input type="number" step="0.01"
+                               name="humidity"
+                               placeholder="💧 Humidity (%)"
+                               min="0" required>
+
+                        <input type="number" step="0.01"
+                               name="rainfall"
+                               placeholder="🌧 Rainfall (mm)"
+                               min="0" required>
+                    </div>
+                </div>
+
+                <button type="submit">
+                    🌱 Recommend Crop
+                </button>
+            </form>
+        </div>
+
+    </section>
+
+    {% if crop %}
+
+    <section class="result-card glass-card">
+
+        <h2>
+            🌾 Recommended Crop
+        </h2>
+
+        <h1 class="crop-name">
+            {{ crop }}
+        </h1>
+
+        <h3 class="confidence">
+            🎯 Confidence : {{ confidence }}%
+        </h3>
+
+        <a href="/" class="try-again-btn">
+        🔄 Predict Again
+        </a>
+    </section>
+
+    {% endif %}
+
+    <section class="about glass-card" id="about">
+        <div class="about-header">
+            <h2 class="section-title">Why AgriPredict?</h2>
+            <p class="about-text">Use intelligent crop recommendations built from soil nutrients and weather conditions. Make confident planting choices, reduce waste, and improve yield with a simple farm-ready interface.</p>
+        </div>
+        <div class="about-grid">
+            <div class="info-card">
+                <h3>Smart Analytics</h3>
+                <p>Combine soil and weather data to recommend the best crop for your field.</p>
+            </div>
+            <div class="info-card">
+                <h3>Quick Input</h3>
+                <p>Enter your values in seconds and get an instant crop suggestion with confidence scoring.</p>
+            </div>
+            <div class="info-card">
+                <h3>Farmer Friendly</h3>
+                <p>Designed for practical agricultural decisions with an intuitive layout and clear results.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact glass-card" id="contact">
+        <h2 class="section-title">Get in touch</h2>
+        <div class="contact-panel">
+            <div class="contact-item">
+                <h3>Need support?</h3>
+                <p>Email us at <a href="mailto:support@agripredict.com">support@agripredict.com</a></p>
+            </div>
+            <div class="contact-item">
+                <h3>Want updates?</h3>
+                <p>Subscribe for future features and crop insights.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h4>AgriPredict</h4>
+                <p>Smart crop recommendations for sustainable farming.</p>
+            </div>
+            <div class="footer-links">
+                <a href="#predict">Predict</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="footer-meta">
+                <p>© 2026 AgriPredict</p>
+                <p>Built with agriculture intelligence.</p>
+            </div>
+        </div>
+    </footer>
+
+</div>
+
+</body>
+
+</html>

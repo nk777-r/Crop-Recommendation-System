@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="login-card">
+    <h2 class="section-title">Crop Prediction</h2>
+    <p class="section-subtitle">Enter soil and weather values to receive an accurate crop recommendation.</p>
+
+    <form class="login-form" action="{{ url_for('predict') }}" method="POST">
+        <div class="input-grid">
+            <div class="form-column">
+                <label for="N">Nitrogen (N)</label>
+                <input id="N" type="number" name="N" placeholder="Nitrogen" min="0" required>
+
+                <label for="P">Phosphorus (P)</label>
+                <input id="P" type="number" name="P" placeholder="Phosphorus" min="0" required>
+
+                <label for="K">Potassium (K)</label>
+                <input id="K" type="number" name="K" placeholder="Potassium" min="0" required>
+
+                <label for="ph">pH</label>
+                <input id="ph" type="number" step="0.01" name="ph" placeholder="pH value" min="0" required>
+            </div>
+            <div class="form-column">
+                <label for="temperature">Temperature</label>
+                <input id="temperature" type="number" name="temperature" placeholder="Temperature (°C)" min="0" required>
+
+                <label for="humidity">Humidity</label>
+                <input id="humidity" type="number" name="humidity" placeholder="Humidity (%)" min="0" required>
+
+                <label for="rainfall">Rainfall</label>
+                <input id="rainfall" type="number" name="rainfall" placeholder="Rainfall (mm)" min="0" required>
+                 <small class="hint">
+                     * enter seasonal average values for rainfall for best results.
+                </small>
+            </div>
+        </div>
+        <button type="submit">Submit for Prediction</button>
+    </form>
+
+    {% if crop %}
+    <div class="result-card">
+        <h2>Recommended Crop</h2>
+        <h1 class="crop-name">{{ crop }}</h1>
+        <h3 class="confidence">Confidence: {{ confidence }}%</h3>
+        <a href="{{ url_for('predict') }}" class="try-again-btn">Predict Again</a>
+    </div>
+    {% endif %}
+</section>
+{% endblock %}

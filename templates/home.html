@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="hero glass-card">
+    <h1>Welcome to AgriPredict</h1>
+    <p class="hero-text">Discover precise crop recommendations using soil nutrients and weather insights.</p>
+    <div class="home-actions">
+        {% if session.get('user') %}
+            <a class="primary-btn" href="{{ url_for('predict') }}">Predict a Crop</a>
+            <a class="secondary-btn" href="{{ url_for('about') }}">About AgriPredict</a>
+        {% else %}
+            <a class="primary-btn" href="{{ url_for('login') }}">Login to Predict</a>
+            <a class="secondary-btn" href="{{ url_for('about') }}">Learn More</a>
+        {% endif %}
+    </div>
+</section>
+
+<section class="info-panel glass-card">
+    <h2 class="section-title">Why use AgriPredict?</h2>
+    <div class="info-grid">
+        <div class="info-card">
+            <h3>Data-driven suggestions</h3>
+            <p>Analyze soil nutrients and weather inputs to recommend the best crop for your land.</p>
+        </div>
+        <div class="info-card">
+            <h3>Easy to use</h3>
+            <p>Submit your field values in seconds and get a recommendation instantly.</p>
+        </div>
+        <div class="info-card">
+            <h3>Practical insights</h3>
+            <p>Make planting decisions with confidence supported by machine learning.</p>
+        </div>
+    </div>
+</section>
+{% if crop %}
+<section class="result-card glass-card">
+    <h2>Most Recent Recommendation</h2>
+    <h1 class="crop-name">{{ crop }}</h1>
+    <h3 class="confidence">Confidence: {{ confidence }}%</h3>
+</section>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="login-card">
+        <h2 class="section-title">Register for AgriPredict</h2>
+        <p class="section-subtitle">Create your account to access crop recommendations and personalized soil insights.</p>
+        {% if message %}
+        <div class="login-alert">{{ message }}</div>
+        {% endif %}
+        <form class="login-form" action="/register" method="POST">
+            <label for="username">Username</label>
+            <input id="username" type="text" name="username" placeholder="Choose a username" required>
+
+            <label for="email">Email</label>
+            <input id="email" type="email" name="email" placeholder="Enter your email (optional)" required>
+
+            <label for="password">Password</label>
+            <div class="password-wrapper">
+                <input id="password" class="password-field" type="password" name="password" placeholder="Create a password" required>
+                <button type="button" id="togglePassword" class="password-toggle" aria-label="Show password">👁️</button>
+            </div>
+
+            <label for="confirm_password">Confirm Password</label>
+            <div class="password-wrapper">
+                <input id="confirm_password" class="password-field" type="password" name="confirm_password" placeholder="Repeat password" required>
+            </div>
+
+            <button type="submit">Create Account</button>
+
+            <div class="login-links">
+                <span>Already registered?</span>
+                <a href="/login">Sign in</a>
+            </div>
+        </form>
+    </section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const passwordFields = document.querySelectorAll('.password-field');
+    const toggleButton = document.getElementById('togglePassword');
+    if (!toggleButton || passwordFields.length === 0) {
+        return;
+    }
+
+    toggleButton.addEventListener('click', function (event) {
+        event.preventDefault();
+        const isHidden = passwordFields[0].type === 'password';
+        passwordFields.forEach(field => field.type = isHidden ? 'text' : 'password');
+        toggleButton.textContent = isHidden ? '🙈' : '👁️';
+        toggleButton.setAttribute('aria-label', isHidden ? 'Hide password' : 'Show password');
+    });
+});
+</script>
+{% endblock %}
